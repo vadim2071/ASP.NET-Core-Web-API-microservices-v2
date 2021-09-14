@@ -28,5 +28,7 @@ namespace MetricsManagerTests
                 // Assert
                 _ = Assert.IsAssignableFrom<IActionResult>(result);
             }
+
+
         }
 }
