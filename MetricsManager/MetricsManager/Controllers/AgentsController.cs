@@ -37,9 +37,15 @@ namespace MetricsManager.Controllers
 
     public class AgentCreateDto
     {
+        private Uri uri;
+
         //public int AgentId { get; }
 
-        public Uri AgentAddress { get; }
+        public Uri AgentAddress { get;}
+        public AgentCreateDto(Uri uri)
+        {
+            this.uri = uri;
+        }
     }
 
 }
