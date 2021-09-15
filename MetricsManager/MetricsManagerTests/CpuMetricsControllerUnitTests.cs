@@ -18,12 +18,12 @@ namespace MetricsManagerTests
         public void GetMetricsFromAgent_ReturnsOk()
         {
             //Arrange
-            var agentId = 1;
+            int agent = 1;
             var fromTime = TimeSpan.FromSeconds(0);
             var toTime = TimeSpan.FromSeconds(100);
 
             //Act
-            var result = controller.GetMetricsFromAgent(agentId, fromTime, toTime);
+            var result = controller.GetMetricsFromAgent(agent, fromTime, toTime);
 
             // Assert
             _ = Assert.IsAssignableFrom<IActionResult>(result);
@@ -47,13 +47,13 @@ namespace MetricsManagerTests
         public void GetMetricsFromAgentIdPercentile_ReturnsOk()
         {
             //Arrange
-            var agentId = 1;
+            int agent = 1;
             var fromTime = TimeSpan.FromSeconds(0);
             var toTime = TimeSpan.FromSeconds(100);
             var percentile = 25;
 
             //Act
-            var result = controller.GetMetricsFromAgentIdPercentile(agentId, fromTime, toTime, percentile);
+            var result = controller.GetMetricsFromAgentIdPercentile(agent, fromTime, toTime, percentile);
 
             // Assert
             _ = Assert.IsAssignableFrom<IActionResult>(result);
