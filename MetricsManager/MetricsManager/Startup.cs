@@ -1,3 +1,5 @@
+using Metrics.Services;
+using Metrics.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +30,10 @@ namespace MetricsManager
         {
 
             services.AddControllers();
+
+            //(Scoped - врем€ жизни) помещение в контейнер реализацию сервиса. —ервисы регистрируем как Scoped
+            services.AddScoped<ICpuMetricsService, CpuMetricsService>(); 
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MetricsManager", Version = "v1" });
