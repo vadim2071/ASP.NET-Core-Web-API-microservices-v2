@@ -31,6 +31,7 @@ namespace MetricsManager
 
             services.AddControllers();
 
+            //
             //(Scoped - врем€ жизни) помещение в контейнер реализацию сервиса. —ервисы регистрируем как Scoped
             services.AddScoped<ICpuMetricsService, CpuMetricsService>(); 
 
