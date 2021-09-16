@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Metrics.Services.Interfaces;
+using Metrics.Services.Model;
 
 namespace Metrics.Services
 {
@@ -14,7 +12,7 @@ namespace Metrics.Services
     {
 
     }
-    class CpuMetricsRepository : ICpuMetricsRepository
+    public class CpuMetricsRepository : ICpuMetricsRepository
     {
         private const string ConnectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
         // инжектируем соединение с базой данных в наш репозиторий через конструктор
