@@ -1,4 +1,4 @@
-﻿using Metrics.Services;
+﻿using Metrics.Services.Repository;
 using MetricsAgent.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

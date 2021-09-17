@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using Metrics.Services;
 using Metrics.Services.Interfaces;
 using System.Data.SQLite;
+using Metrics.Services.Repository;
 
 namespace MetricsAgent
 {
@@ -25,7 +26,7 @@ namespace MetricsAgent
 
             services.AddControllers();
             ConfigureSqlLiteConnection(services);
-            services.AddScoped<ICpuMetricsRepository, ICpuMetricsRepository>();
+            services.AddScoped<ICpuMetricsRepository, CpuMetricsRepository>(); 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MetricsAgent", Version = "v1" });
