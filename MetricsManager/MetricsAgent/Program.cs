@@ -39,11 +39,11 @@ namespace MetricsAgent
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
-                /*.ConfigureLogging(logging =>
+                })
+                .ConfigureLogging(logging =>
                 {
                     logging.ClearProviders(); // создание провайдеров логирования
                     logging.SetMinimumLevel(LogLevel.Trace); // устанавливаем минимальный уровень логирования
-                }).UseNLog();*/
+                }).UseNLog();
     }
 }
