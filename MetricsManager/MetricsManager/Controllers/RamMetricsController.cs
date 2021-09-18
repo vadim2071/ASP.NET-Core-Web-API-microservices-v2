@@ -16,13 +16,12 @@ namespace MetricsManager.Controllers
         public RamMetricsController(ILogger<RamMetricsController> logger)
         {
             _logger = logger;
-            _logger.LogDebug(1, "NLog встроен в RamMetricsController");
         }
+
         [HttpGet("agent/{agentId}")]
         public IActionResult GetMetricsFromAgent([FromRoute] int agentId)
 
         {
-            _logger.LogInformation("Привет! Это наше первое сообщение в лог от RamMetricsController");
             return Ok();
         }
 
