@@ -1,30 +1,30 @@
-﻿using Metrics.Services.Interfaces;
-using Metrics.Services.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using MetricsAgent.DAL.Interfaces;
+using MetricsAgent.DAL.Models;
 
 namespace Metrics.Services.Repository
 {
     // маркировочный интерфейс
     // необходим, чтобы проверить работу репозитория на тесте-заглушке
-    public interface INetworkMetricsRepository : IRepository<NetworkMetric>
+    public interface ICpuMetricsRepository : IRepository<CpuMetric>
     {
 
     }
-    public class NetworkMetricsRepository
+    public class CpuMetricsRepository : ICpuMetricsRepository
     {
         private const string ConnectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
         // инжектируем соединение с базой данных в наш репозиторий через конструктор
 
-        public void Create(NetworkMetric item)
+        public void Create(CpuMetric item)
         {
             using var connection = new SQLiteConnection(ConnectionString);
             connection.Open();
             // создаем команду
             using var cmd = new SQLiteCommand(connection);
             // прописываем в команду SQL запрос на вставку данных
-            cmd.CommandText = "INSERT INTO networkmetrics(value, time) VALUES(@value, @time)";
+            cmd.CommandText = "INSERT INTO cpumetrics(value, time) VALUES(@value, @time)";
 
             // добавляем параметры в запрос из нашего объекта
             cmd.Parameters.AddWithValue("@value", item.Value);
@@ -45,19 +45,19 @@ namespace Metrics.Services.Repository
             connection.Open();
             using var cmd = new SQLiteCommand(connection);
             // прописываем в команду SQL запрос на удаление данных
-            cmd.CommandText = "DELETE FROM networkmetrics WHERE id=@id";
+            cmd.CommandText = "DELETE FROM cpumetrics WHERE id=@id";
 
             cmd.Parameters.AddWithValue("@id", id);
             cmd.Prepare();
             cmd.ExecuteNonQuery();
         }
 
-        public void Update(NetworkMetric item)
+        public void Update(CpuMetric item)
         {
             using var connection = new SQLiteConnection(ConnectionString);
             using var cmd = new SQLiteCommand(connection);
             // прописываем в команду SQL запрос на обновление данных
-            cmd.CommandText = "UPDATE networkmetrics SET value = @value, time = @time WHERE id=@id;";
+            cmd.CommandText = "UPDATE cpumetrics SET value = @value, time = @time WHERE id=@id;";
             cmd.Parameters.AddWithValue("@id", item.Id);
             cmd.Parameters.AddWithValue("@value", item.Value);
             cmd.Parameters.AddWithValue("@time", item.Time.TotalSeconds);
@@ -66,16 +66,16 @@ namespace Metrics.Services.Repository
             cmd.ExecuteNonQuery();
         }
 
-        public IList<NetworkMetric> GetAll()
+        public IList<CpuMetric> GetAll()
         {
             using var connection = new SQLiteConnection(ConnectionString);
             connection.Open();
             using var cmd = new SQLiteCommand(connection);
 
             // прописываем в команду SQL запрос на получение всех данных из таблицы
-            cmd.CommandText = "SELECT * FROM networkmetrics";
+            cmd.CommandText = "SELECT * FROM cpumetrics";
 
-            var returnList = new List<NetworkMetric>();
+            var returnList = new List<CpuMetric>();
 
             using (SQLiteDataReader reader = cmd.ExecuteReader())
             {
@@ -83,12 +83,12 @@ namespace Metrics.Services.Repository
                 while (reader.Read())
                 {
                     // добавляем объект в список возврата
-                    returnList.Add(new NetworkMetric
+                    returnList.Add(new CpuMetric
                     {
                         Id = reader.GetInt32(0),
                         Value = reader.GetInt32(1),
                         // налету преобразуем прочитанные секунды в метку времени
-                        Time = TimeSpan.FromSeconds(reader.GetInt32(2))
+                        Time = DateTime.FromSeconds(reader.GetInt32(2))
                     });
                 }
             }
@@ -96,23 +96,23 @@ namespace Metrics.Services.Repository
             return returnList;
         }
 
-        public NetworkMetric GetById(int id)
+        public CpuMetric GetById(int id)
         {
             using var connection = new SQLiteConnection(ConnectionString);
             connection.Open();
             using var cmd = new SQLiteCommand(connection);
-            cmd.CommandText = "SELECT * FROM networkmetrics WHERE id=@id";
+            cmd.CommandText = "SELECT * FROM cpumetrics WHERE id=@id";
             using (SQLiteDataReader reader = cmd.ExecuteReader())
             {
                 // если удалось что то прочитать
                 if (reader.Read())
                 {
                     // возвращаем прочитанное
-                    return new NetworkMetric
+                    return new CpuMetric
                     {
                         Id = reader.GetInt32(0),
                         Value = reader.GetInt32(1),
-                        Time = TimeSpan.FromSeconds(reader.GetInt32(1))
+                        Time = DateTime.FromSeconds(reader.GetInt32(1))
                     };
                 }
                 else
@@ -122,5 +122,6 @@ namespace Metrics.Services.Repository
                 }
             }
         }
+
     }
 }

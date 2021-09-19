@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Metrics.Services.Model
+namespace MetricsAgent.DAL.Models
 {
     public class CpuMetric : baseMetric
     {
