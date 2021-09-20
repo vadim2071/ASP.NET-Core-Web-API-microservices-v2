@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MetricsAgent.Controllers
 {
-    /*
+    
     [Route("api/[controller]")]
     [ApiController]
     public class SqlTestController : ControllerBase
@@ -108,5 +108,5 @@ namespace MetricsAgent.Controllers
             public long Time { get; set; }
 
         }
-    }*/
+    }
 }

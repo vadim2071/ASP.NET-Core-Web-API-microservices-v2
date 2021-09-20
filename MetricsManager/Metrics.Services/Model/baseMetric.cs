@@ -10,13 +10,13 @@ namespace Metrics.Services.Model
     {
         public int Id { get; set; }
         public int Value { get; set; }
-        public DateTime Time { get; set; }
+        public TimeSpan Time { get; set; }
 
         public baseMetric()
         {
         }
 
-        public baseMetric (int value, DateTime dateTime)
+        public baseMetric (int value, TimeSpan dateTime)
         {
             Value = value;
             Time = dateTime;
