@@ -5,6 +5,6 @@ namespace MetricsAgent.DAL.Interfaces
 {
     public interface IHddMetricsService
     {
-        long GetMetricsFromAgent(int agentId, DateTime fromTime, DateTime toTime);
+        long GetMetricsFromAgent(int agentId, TimeSpan fromTime, TimeSpan toTime);
     }
 }

@@ -6,7 +6,7 @@ namespace MetricsAgent.Services
 {
     public class NetworkMetricsService : INetworkMetricsService
     {
-        public long GetMetricsFromAgent(int agentId, DateTime fromTime, DateTime toTime)
+        public long GetMetricsFromAgent(int agentId, TimeSpan fromTime, TimeSpan toTime)
         {
             throw new NotImplementedException();
         }

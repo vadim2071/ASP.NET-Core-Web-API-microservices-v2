@@ -26,7 +26,7 @@ namespace MetricsAgent.Controllers
         }
 
         [HttpGet("from/{fromTime}/to/{toTime}")]
-        public IActionResult GetMetrics([FromRoute] DateTime fromTime,[FromRoute] DateTime toTime)
+        public IActionResult GetMetrics([FromRoute] TimeSpan fromTime,[FromRoute] TimeSpan toTime)
         {
             _logger.LogInformation("Привет! Это наше первое сообщение в лог DotNetMetricsController");
             var metrics = repository.GetAll();

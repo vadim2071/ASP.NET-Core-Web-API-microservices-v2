@@ -12,7 +12,7 @@ namespace Metrics.Services.Repository
     {
 
     }
-    public class NetworkMetricsRepository
+    public class NetworkMetricsRepository : INetworkMetricsRepository
     {
         private const string ConnectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
         // инжектируем соединение с базой данных в наш репозиторий через конструктор
@@ -88,7 +88,7 @@ namespace Metrics.Services.Repository
                         Id = reader.GetInt32(0),
                         Value = reader.GetInt32(1),
                         // налету преобразуем прочитанные секунды в метку времени
-                        Time = DateTime.FromSeconds(reader.GetInt32(2))
+                        Time = TimeSpan.FromSeconds(reader.GetInt32(2))
                     });
                 }
             }
@@ -112,7 +112,7 @@ namespace Metrics.Services.Repository
                     {
                         Id = reader.GetInt32(0),
                         Value = reader.GetInt32(1),
-                        Time = DateTime.FromSeconds(reader.GetInt32(1))
+                        Time = TimeSpan.FromSeconds(reader.GetInt32(1))
                     };
                 }
                 else

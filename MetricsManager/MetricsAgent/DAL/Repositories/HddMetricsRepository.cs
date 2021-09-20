@@ -87,7 +87,7 @@ namespace Metrics.Services.Repository
                         Id = reader.GetInt32(0),
                         Value = reader.GetInt32(1),
                         // налету преобразуем прочитанные секунды в метку времени
-                        Time = DateTime.FromSeconds(reader.GetInt32(2))
+                        Time = TimeSpan.FromSeconds(reader.GetInt32(2))
                     });
                 }
             }
@@ -111,7 +111,7 @@ namespace Metrics.Services.Repository
                     {
                         Id = reader.GetInt32(0),
                         Value = reader.GetInt32(1),
-                        Time = DateTime.FromSeconds(reader.GetInt32(1))
+                        Time = TimeSpan.FromSeconds(reader.GetInt32(1))
                     };
                 }
                 else

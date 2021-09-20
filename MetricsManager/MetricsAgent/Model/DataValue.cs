@@ -8,9 +8,9 @@ namespace MetricsAgent.Model
         public class dataValue
         {
             public int Value { get; set; }
-            public DateTime Time { get; set; }
+            public TimeSpan Time { get; set; }
 
-            public dataValue(int value, DateTime dateTime)
+            public dataValue(int value, TimeSpan dateTime)
             {
                 Value = value;
                 Time = dateTime;
