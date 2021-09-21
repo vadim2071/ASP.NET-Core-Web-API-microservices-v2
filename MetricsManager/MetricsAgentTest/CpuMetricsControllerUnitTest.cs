@@ -1,5 +1,8 @@
-﻿using MetricsAgent.Controllers;
+﻿using Metrics.Services.Model;
+using Metrics.Services.Repository;
+using MetricsAgent.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
 using System;
 using Xunit;
 
@@ -8,24 +11,27 @@ namespace MetricsAgentTests
     public class CpuMetricsControllerUnitTests
     {
         private CpuMetricsController controller;
+        private Mock<ICpuMetricsRepository> mock;
 
         public CpuMetricsControllerUnitTests()
         {
-            controller = new CpuMetricsController();
+            mock = new Mock<ICpuMetricsRepository>();
+            controller = new CpuMetricsController(mock.Object);
         }
 
         [Fact]
-        public void GetMetrics_ReturnsOk()
+        public void Create_ShouldCall_Create_From_Repository()
         {
-            //Arrange
-            var fromTime = TimeSpan.FromSeconds(0);
-            var toTime = TimeSpan.FromSeconds(100);
+            // устанавливаем параметр заглушки
+            // в заглушке прописываем что в репозиторий прилетит CpuMetric объект
+            mock.Setup(repository => repository.Create(It.IsAny<CpuMetric>())).Verifiable();
 
-            //Act
-            var result = controller.GetMetrics(fromTime, toTime);
+            // выполняем действие на контроллере
+            var result = controller.Create(new MetricsAgent.Requests.CpuMetricCreateRequest { Time = TimeSpan.FromSeconds(1), Value = 50 });
 
-            // Assert
-            _ = Assert.IsAssignableFrom<IActionResult>(result);
+            // проверяем заглушку на то, что пока работал контроллер
+            // действительно вызвался метод Create репозитория с нужным типом объекта в параметре
+            mock.Verify(repository => repository.Create(It.IsAny<CpuMetric>()), Times.AtMostOnce());
         }
 
 
