@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using MetricsAgent.DAL.Interfaces;
 using MetricsAgent.DAL.Models;
+using Dapper;
 
 namespace Metrics.Services.Repository
 {
-    // маркировочный интерфейс
-    // необходим, чтобы проверить работу репозитория на тесте-заглушке
     public interface ICpuMetricsRepository : IRepository<CpuMetric>
     {
 
     }
     public class CpuMetricsRepository : ICpuMetricsRepository
     {
-        private const string ConnectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
+        //строка подключения
+        private const string ConnectionString = @"Data Source=metrics.db; Version=3;Pooling=True;Max Pool Size=100;";
         // инжектируем соединение с базой данных в наш репозиторий через конструктор
 
         public void Create(CpuMetric item)
