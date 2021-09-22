@@ -17,7 +17,7 @@ namespace Metrics.Services.Repository
     public class CpuMetricsRepository : ICpuMetricsRepository
     {
         //строка подключения
-        private const string ConnectionString = @"Data Source=metrics.db; Version=3;Pooling=True;Max Pool Size=100;";
+        private const string ConnectionString = "Data Source=metrics.db; Version=3;Pooling=True;Max Pool Size=100;"; //убрал в начале строки "Data -> @
         // инжектируем соединение с базой данных в наш репозиторий через конструктор
 
         public CpuMetricsRepository()
