@@ -12,7 +12,6 @@ namespace Metrics.Services.Repository
 {
     public interface IDotNetMetricsRepository : IRepository<DotNetMetric>
     {
-
     }
     public class DotNetMetricsRepository : IDotNetMetricsRepository
     {
