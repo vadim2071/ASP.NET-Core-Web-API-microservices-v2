@@ -15,11 +15,11 @@ namespace MetricsAgent.Controllers
     {
         private readonly ILogger<CpuMetricsController> _logger;
 
-        public CpuMetricsController(ILogger<CpuMetricsController> logger)
+        /*public CpuMetricsController(ILogger<CpuMetricsController> logger)
         {
             _logger = logger;
             _logger.LogDebug(1, "NLog встроен в CpuMetricsController");
-        }
+        }*/
 
         private ICpuMetricsRepository repository;
         public CpuMetricsController(ICpuMetricsRepository repository)
@@ -30,63 +30,34 @@ namespace MetricsAgent.Controllers
         [HttpGet("sql-read-write-test")]
         public IActionResult TryToInsertAndRead()
         {
+            //записываем 4 набора данных
             var record1 = new CpuMetric();
             record1.Time = new TimeSpan(100);
             record1.Value = 50;
             repository.Create(record1);
             
             var record2 = new CpuMetric();
-            record1.Time = new TimeSpan(102);
-            record1.Value = 55;
+            record2.Time = new TimeSpan(102);
+            record2.Value = 55;
             repository.Create(record2); 
             
             var record3 = new CpuMetric();
-            record1.Time = new TimeSpan(110);
-            record1.Value = 75;
+            record3.Time = new TimeSpan(110);
+            record3.Value = 75;
             repository.Create(record3);
 
             var record4 = new CpuMetric();
-            record1.Time = new TimeSpan(150);
-            record1.Value = 27;
+            record4.Time = new TimeSpan(150);
+            record4.Value = 27;
             repository.Create(record4);
 
-            // создаем соединение с базой данных
-            using (var connection = new SQLiteConnection(connectionString))
-            {
-                {
-                    
-                    // создаем строку для выборки данных из базы
-                    // LIMIT 3 обозначает, что мы достанем только 3 записи
-                    string readQuery = "SELECT * FROM cpumetrics LIMIT 3";
+            // создаем массив, в который запишем объекты с данными из базы данных
+            var returnArray = repository.GetAll();
 
-                    // создаем массив, в который запишем объекты с данными из базы данных
-                    var returnArray = new CpuMetric[3];
-                    // изменяем текст команды на наш запрос чтения
-                    command.CommandText = readQuery;
 
-                    // создаем читалку из базы данных
-                    using (SQLiteDataReader reader = command.ExecuteReader())
-                    {
-                        // счетчик для того, чтобы записать объект в правильное место в массиве
-                        var counter = 0;
-                        // цикл будет выполняться до тех пор, пока есть что читать из базы данных
-                        while (reader.Read())
-                        {
-                            // создаем объект и записываем его в массив
-                            returnArray[counter] = new CpuMetric
-                            {
-                                Id = reader.GetInt32(0), // читаем данные полученные из базы данных
-                                Value = reader.GetInt32(1), // преобразуя к целочисленному типу
-                                Time = reader.GetInt64(2)
-                            };
-                            // увеличиваем значение счетчика
-                            counter++;
-                        }
-                    }
-                    // оборачиваем массив с данными в объект ответа и возвращаем пользователю 
-                    return Ok(returnArray);
-                }
-            }
+            // оборачиваем массив с данными в объект ответа и возвращаем пользователю 
+            return Ok(returnArray);
+  
         }
 
         [HttpGet("from/{fromTime}/to/{toTime}")]
