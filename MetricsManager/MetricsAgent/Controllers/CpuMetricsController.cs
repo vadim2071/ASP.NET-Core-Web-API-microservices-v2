@@ -1,4 +1,5 @@
 ﻿using Metrics.Services.Repository;
+using MetricsAgent.DAL.Models;
 using MetricsAgent.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -29,38 +30,31 @@ namespace MetricsAgent.Controllers
         [HttpGet("sql-read-write-test")]
         public IActionResult TryToInsertAndRead()
         {
-            repository.Create()
+            var record1 = new CpuMetric();
+            record1.Time = new TimeSpan(100);
+            record1.Value = 50;
+            repository.Create(record1);
+            
+            var record2 = new CpuMetric();
+            record1.Time = new TimeSpan(102);
+            record1.Value = 55;
+            repository.Create(record2); 
+            
+            var record3 = new CpuMetric();
+            record1.Time = new TimeSpan(110);
+            record1.Value = 75;
+            repository.Create(record3);
+
+            var record4 = new CpuMetric();
+            record1.Time = new TimeSpan(150);
+            record1.Value = 27;
+            repository.Create(record4);
 
             // создаем соединение с базой данных
             using (var connection = new SQLiteConnection(connectionString))
             {
-                // открываем соединение
-                connection.Open();
-
-                // создаем объект через который будут выполняться команды к базе данных
-                using (var command = new SQLiteCommand(connection))
                 {
-                    // задаем новый текст команды для выполнения
-                    // удаляем таблицу с метриками если она существует в базе данных
-                    command.CommandText = "DROP TABLE IF EXISTS cpumetrics";
-                    // отправляем запрос в базу данных
-                    command.ExecuteNonQuery();
-
-                    // создаем таблицу с метриками
-                    command.CommandText = @"CREATE TABLE cpumetrics(id INTEGER PRIMARY KEY,
-                    value INT, time INT)";
-                    command.ExecuteNonQuery();
-
-                    // создаем запрос на вставку данных
-                    command.CommandText = "INSERT INTO cpumetrics(value, time) VALUES(10,1)";
-                    command.ExecuteNonQuery();
-                    command.CommandText = "INSERT INTO cpumetrics(value, time) VALUES(50,2)";
-                    command.ExecuteNonQuery();
-                    command.CommandText = "INSERT INTO cpumetrics(value, time) VALUES(75,4)";
-                    command.ExecuteNonQuery();
-                    command.CommandText = "INSERT INTO cpumetrics(value, time) VALUES(90,5)";
-                    command.ExecuteNonQuery();
-
+                    
                     // создаем строку для выборки данных из базы
                     // LIMIT 3 обозначает, что мы достанем только 3 записи
                     string readQuery = "SELECT * FROM cpumetrics LIMIT 3";
