@@ -13,16 +13,13 @@ namespace MetricsAgent.Controllers
     public class HddMetricsController : ControllerBase
     {
         private readonly ILogger<HddMetricsController> _logger;
-
-        public HddMetricsController(ILogger<HddMetricsController> logger)
-        {
-            _logger = logger;
-            _logger.LogDebug(1, "NLog встроен в HddMetricsController");
-        }
         private IHddMetricsRepository repository;
-        public HddMetricsController(IHddMetricsRepository repository)
+
+        public HddMetricsController(IHddMetricsRepository repository, ILogger<HddMetricsController> logger)
         {
             this.repository = repository;
+            _logger = logger;
+            _logger.LogDebug(1, "NLog встроен в HddMetricsController");
         }
 
         [HttpGet("from/{fromTime}/to/{toTime}")]

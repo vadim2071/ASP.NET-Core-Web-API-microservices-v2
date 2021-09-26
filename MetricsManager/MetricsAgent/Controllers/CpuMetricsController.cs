@@ -14,17 +14,12 @@ namespace MetricsAgent.Controllers
     public class CpuMetricsController : ControllerBase
     {
         private readonly ILogger<CpuMetricsController> _logger;
-
-        /*public CpuMetricsController(ILogger<CpuMetricsController> logger)
-        {
-            _logger = logger;
-            _logger.LogDebug(1, "NLog встроен в CpuMetricsController");
-        }*/
-
         private ICpuMetricsRepository repository;
-        public CpuMetricsController(ICpuMetricsRepository repository)
+
+        public CpuMetricsController(ICpuMetricsRepository repository, ILogger<CpuMetricsController> logger)
         {
             this.repository = repository;
+            _logger = logger;
         }
 
         [HttpGet("sql-read-write-test")]
@@ -63,7 +58,7 @@ namespace MetricsAgent.Controllers
         [HttpGet("from/{fromTime}/to/{toTime}")]
         public IActionResult GetMetrics([FromRoute] TimeSpan fromTime,[FromRoute] TimeSpan toTime)
         {
-            _logger.LogInformation("Привет! Это наше первое сообщение в лог CpuMetricsController");
+            //_logger.LogInformation("Привет! Это наше первое сообщение в лог CpuMetricsController");
             var metrics = repository.GetAll();
 
             var response = new AllCpuMetricsResponse()
