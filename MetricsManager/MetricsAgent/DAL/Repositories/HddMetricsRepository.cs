@@ -17,7 +17,7 @@ namespace Metrics.Services.Repository
         private const string ConnectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
         public HddMetricsRepository()
         {
-            SqlMapper.AddTypeHandler(new TimeSpanHandler());
+            //SqlMapper.AddTypeHandler(new TimeSpanHandler());
         }
 
         public void Create(HddMetric item)
@@ -28,7 +28,7 @@ namespace Metrics.Services.Repository
                     new
                     {
                         value = item.Value,
-                        time = item.Time.TotalSeconds
+                        time = item.Time
                     });
             }
         }
@@ -53,7 +53,7 @@ namespace Metrics.Services.Repository
                     new
                     {
                         value = item.Value,
-                        time = item.Time.TotalSeconds,
+                        time = item.Time,
                         id = item.Id
                     });
             }

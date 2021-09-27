@@ -19,7 +19,7 @@ namespace Metrics.Services.Repository
 
         public DotNetMetricsRepository()
         {
-            SqlMapper.AddTypeHandler(new TimeSpanHandler());
+            //SqlMapper.AddTypeHandler(new TimeSpanHandler());
         }
 
         public void Create(DotNetMetric item)
@@ -30,7 +30,7 @@ namespace Metrics.Services.Repository
                     new
                     {
                         value = item.Value,
-                        time = item.Time.TotalSeconds
+                        time = item.Time
                     });
             }
         }
@@ -55,7 +55,7 @@ namespace Metrics.Services.Repository
                     new
                     {
                         value = item.Value,
-                        time = item.Time.TotalSeconds,
+                        time = item.Time,
                         id = item.Id
                     });
             }

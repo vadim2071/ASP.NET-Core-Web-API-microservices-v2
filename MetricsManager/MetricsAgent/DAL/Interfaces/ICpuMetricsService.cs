@@ -5,6 +5,6 @@ namespace MetricsAgent.DAL.Interfaces
 {
     public interface ICpuMetricsService
     {
-        long GetMetricsFromAgent(int agentId, TimeSpan fromTime, TimeSpan toTime); // long из-за отсутсвия модели DTO
+        long GetMetricsFromAgent(int agentId, DateTime fromTime, DateTime toTime); // long из-за отсутсвия модели DTO
     }
 }

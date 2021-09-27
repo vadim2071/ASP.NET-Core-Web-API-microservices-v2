@@ -7,12 +7,12 @@ namespace MetricsAgent.DAL.Models
     {
         public int Id { get; set; }
         public int Value { get; set; }
-        public TimeSpan Time { get; set; }
+        public DateTime Time { get; set; }
         public baseMetric()
         {
         }
 
-        public baseMetric (int value, TimeSpan dateTime)
+        public baseMetric (int value, DateTime dateTime)
         {
             Value = value;
             Time = dateTime;

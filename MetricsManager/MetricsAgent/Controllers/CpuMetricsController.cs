@@ -22,27 +22,31 @@ namespace MetricsAgent.Controllers
             _logger = logger;
         }
 
-        [HttpGet("sql-read-write-test")]
+        [HttpGet("sql-read-write-test")] //тест записи в базу и чтения
         public IActionResult TryToInsertAndRead()
         {
             //записываем 4 набора данных
             var record1 = new CpuMetric();
-            record1.Time = new TimeSpan(100);
+            record1.Time = new DateTime(100);
+            //record1.Time = new TimeSpan(100);
             record1.Value = 50;
             repository.Create(record1);
             
             var record2 = new CpuMetric();
-            record2.Time = new TimeSpan(102);
+            record2.Time = new DateTime(102);
+            //record2.Time = new TimeSpan(102);
             record2.Value = 55;
             repository.Create(record2); 
             
             var record3 = new CpuMetric();
-            record3.Time = new TimeSpan(110);
+            record3.Time = new DateTime(110);
+            //record3.Time = new TimeSpan(110);
             record3.Value = 75;
             repository.Create(record3);
 
             var record4 = new CpuMetric();
-            record4.Time = new TimeSpan(150);
+            record4.Time = new DateTime(150);
+            //record4.Time = new TimeSpan(150);
             record4.Value = 27;
             repository.Create(record4);
 
