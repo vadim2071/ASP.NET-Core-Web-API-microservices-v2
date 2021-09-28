@@ -3,9 +3,8 @@
 
 namespace MetricsAgent.Request
 {
-    public class HddMetricCreateRequest
+    public class HddMetricCreateRequest : BaseMetricsCreateRequest
     {
-        public DateTime Time { get; set; }
-        public int Value { get; set; }
+
     }
 }

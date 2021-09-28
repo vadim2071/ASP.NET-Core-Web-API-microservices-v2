@@ -3,9 +3,8 @@
 
 namespace MetricsAgent.Request
 {
-    public class NetworkMetricCreateRequest
+    public class NetworkMetricCreateRequest : BaseMetricsCreateRequest
     {
-        public TimeSpan Time { get; set; }
-        public int Value { get; set; }
+
     }
 }

@@ -3,9 +3,8 @@
 
 namespace MetricsAgent.Request
 {
-    public class CpuMetricCreateRequest
+    public class CpuMetricCreateRequest : BaseMetricsCreateRequest
     {
-        public DateTime Time { get; set; }
-        public int Value { get; set; }
+
     }
 }
