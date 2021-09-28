@@ -8,10 +8,7 @@ namespace MetricsAgent.Responses
     {
         public List<HddMetricDTO> Metrics { get; set; }
     }
-    public class HddMetricDTO
+    public class HddMetricDTO : baseMetricDTO
     {
-        public DateTime Time { get; set; }
-        public int Value { get; set; }
-        public int Id { get; set; }
     }
 }

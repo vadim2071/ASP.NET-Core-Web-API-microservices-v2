@@ -3,14 +3,11 @@ using System.Collections.Generic;
 
 namespace MetricsAgent.Responses
 {
-    public class AllCpuMetricsResponse
+    public class AllCpuMetricsResponse 
     {
         public List<CpuMetricDTO> Metrics { get; set; }
     }
-    public class CpuMetricDTO
+    public class CpuMetricDTO : baseMetricDTO
     {
-        public DateTime Time { get; set; }
-        public int Value { get; set; }
-        public int Id { get; set; }
     }
 }

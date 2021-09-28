@@ -8,10 +8,7 @@ namespace MetricsAgent.Responses
     {
         public List<RamMetricDTO> Metrics { get; set; }
     }
-    public class RamMetricDTO
+    public class RamMetricDTO : baseMetricDTO
     {
-        public DateTime Time { get; set; }
-        public int Value { get; set; }
-        public int Id { get; set; }
     }
 }

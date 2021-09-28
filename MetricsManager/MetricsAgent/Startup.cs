@@ -6,6 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Data.SQLite;
 using Metrics.Services.Repository;
+using AutoMapper;
+using MetricsAgent.DAL;
 
 namespace MetricsAgent
 {
@@ -29,6 +31,11 @@ namespace MetricsAgent
             services.AddScoped<IHddMetricsRepository, HddMetricsRepository>();
             services.AddScoped<INetworkMetricsRepository, NetworkMetricsRepository>();
             services.AddScoped<IRamMetricsRepository, RamMetricsRepository>();
+            //добавляем AutoMapper
+            var mapperConfiguration = new MapperConfiguration(mp => mp.AddProfile(new MapperProfile()));
+            var mapper = mapperConfiguration.CreateMapper();
+            services.AddSingleton(mapper);
+            // end добавляем AutoMapper
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MetricsAgent", Version = "v1" });

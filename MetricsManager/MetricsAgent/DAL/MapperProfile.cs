@@ -13,7 +13,8 @@ namespace MetricsAgent.DAL
         public MapperProfile()
         {
             // добавлять сопоставления в таком стиле нужно для всех объектов 
-            CreateMap<CpuMetric, CpuMetricDTO>(); //!!!!!!!!!!!! Сделать абстрактный класс и BaseMetricDto!!!!!!!!!!!!
+            CreateMap<baseMetric, baseMetricDTO>();
+            CreateMap<baseMetricDTO, baseMetric>();
         }
     }
 }
