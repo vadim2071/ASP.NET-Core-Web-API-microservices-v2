@@ -7,14 +7,14 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
 
-namespace Metrics.Services.Repository
+namespace MetricsAgent.DAL.Repositories
 {
-    public interface INetworkMetricsRepository : IRepository<NetworkMetric>
+    //public interface INetworkMetricsRepository : IRepository<NetworkMetric>
+    //{
+    //}
+    public class NetworkMetricsRepository : BaseMetricsRepository<NetworkMetric>
     {
-    }
-    public class NetworkMetricsRepository : INetworkMetricsRepository
-    {
-        private const string ConnectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
+        /*private const string ConnectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
         public NetworkMetricsRepository()
         {
             //SqlMapper.AddTypeHandler(new TimeSpanHandler());
@@ -74,6 +74,6 @@ namespace Metrics.Services.Repository
                 return connection.QuerySingle<NetworkMetric>("SELECT Id, Time, Value FROM networkmetrics WHERE id=@id",
                     new { id = id });
             }
-        }
+        }*/
     }
 }

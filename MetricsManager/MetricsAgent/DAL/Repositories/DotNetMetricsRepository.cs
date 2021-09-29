@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SQLite;
-using System.Data;
-using MetricsAgent.DAL.Interfaces;
+﻿
 using MetricsAgent.DAL.Models;
-using MetricsAgent.DAL;
-using Dapper;
-using System.Linq;
 
-namespace Metrics.Services.Repository
+
+namespace MetricsAgent.DAL.Repositories
 {
-    public interface IDotNetMetricsRepository : IRepository<DotNetMetric>
+    //public interface IDotNetMetricsRepository : IRepository<DotNetMetric>
+    //{
+    //}
+    public class DotNetMetricsRepository : BaseMetricsRepository<DotNetMetric>
     {
-    }
-    public class DotNetMetricsRepository : IDotNetMetricsRepository
-    {
-        private const string ConnectionString = "Data Source=metrics.db; Version=3;Pooling=True;Max Pool Size=100;"; //убрал в начале строки "Data -> @
+        /*private const string ConnectionString = "Data Source=metrics.db; Version=3;Pooling=True;Max Pool Size=100;"; //убрал в начале строки "Data -> @
 
         public DotNetMetricsRepository()
         {
@@ -76,6 +70,6 @@ namespace Metrics.Services.Repository
                 return connection.QuerySingle<DotNetMetric>("SELECT Id, Time, Value FROM dotnetmetrics WHERE id=@id",
                     new { id = id });
             }
-        }
+        }*/
     }
 }

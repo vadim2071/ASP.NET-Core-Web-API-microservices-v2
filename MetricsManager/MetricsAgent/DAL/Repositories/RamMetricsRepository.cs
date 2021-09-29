@@ -7,74 +7,75 @@ using MetricsAgent.DAL.Models;
 using MetricsAgent.DAL;
 using Dapper;
 using System.Linq;
+using MetricsAgent.DAL.Repositories;
 
-namespace Metrics.Services.Repository
+namespace MetricsAgent.DAL.Repositories
 {
-    public interface IRamMetricsRepository : IRepository<RamMetric>
+    /*public interface IRamMetricsRepository : IRepository<RamMetric>
     {
-    }
-    public class RamMetricsRepository : IRamMetricsRepository
+    }*/
+    public class RamMetricsRepository : BaseMetricsRepository<RamMetric>
     {
-        private const string ConnectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
-        public RamMetricsRepository()
-        {
-            //SqlMapper.AddTypeHandler(new TimeSpanHandler());
-        }
+        /* private const string ConnectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
+         public RamMetricsRepository()
+         {
+             //SqlMapper.AddTypeHandler(new TimeSpanHandler());
+         }
 
-        public void Create(RamMetric item)
-        {
-            using (var connection = new SQLiteConnection(ConnectionString))
-            {
-                connection.Execute("INSERT INTO rammetrics(value, time) VALUES(@value, @time)",
-                    new
-                    {
-                        value = item.Value,
-                        time = item.Time
-                    });
-            }
-        }
+         public void Create(RamMetric item)
+         {
+             using (var connection = new SQLiteConnection(ConnectionString))
+             {
+                 connection.Execute("INSERT INTO rammetrics(value, time) VALUES(@value, @time)",
+                     new
+                     {
+                         value = item.Value,
+                         time = item.Time
+                     });
+             }
+         }
 
-        public void Delete(int id)
-        {
-            using (var connection = new SQLiteConnection(ConnectionString))
-            {
-                connection.Execute("DELETE FROM rammetrics WHERE id=@id",
-                    new
-                    {
-                        id = id
-                    });
-            }
-        }
+         public void Delete(int id)
+         {
+             using (var connection = new SQLiteConnection(ConnectionString))
+             {
+                 connection.Execute("DELETE FROM rammetrics WHERE id=@id",
+                     new
+                     {
+                         id = id
+                     });
+             }
+         }
 
-        public void Update(RamMetric item)
-        {
-            using (var connection = new SQLiteConnection(ConnectionString))
-            {
-                connection.Execute("UPDATE rammetrics SET value = @value, time = @time WHERE id=@id",
-                    new
-                    {
-                        value = item.Value,
-                        time = item.Time,
-                        id = item.Id
-                    });
-            }
-        }
+         public void Update(RamMetric item)
+         {
+             using (var connection = new SQLiteConnection(ConnectionString))
+             {
+                 connection.Execute("UPDATE rammetrics SET value = @value, time = @time WHERE id=@id",
+                     new
+                     {
+                         value = item.Value,
+                         time = item.Time,
+                         id = item.Id
+                     });
+             }
+         }
 
-        public IList<RamMetric> GetAll()
-        {
-            using (var connection = new SQLiteConnection(ConnectionString))
-            {
-                return connection.Query<RamMetric>("SELECT Id, Time, Value FROM rammetrics").ToList();
-            }
-        }
+         public IList<RamMetric> GetAll()
+         {
+             using (var connection = new SQLiteConnection(ConnectionString))
+             {
+                 return connection.Query<RamMetric>("SELECT Id, Time, Value FROM rammetrics").ToList();
+             }
+         }
 
-        public RamMetric GetById(int id)
-        {
-            using (var connection = new SQLiteConnection(ConnectionString))
-            {
-                return connection.QuerySingle<RamMetric>("SELECT Id, Time, Value FROM rammetrics WHERE id=@id",
-                    new { id = id });
-            }
-        }
+         public RamMetric GetById(int id)
+         {
+             using (var connection = new SQLiteConnection(ConnectionString))
+             {
+                 return connection.QuerySingle<RamMetric>("SELECT Id, Time, Value FROM rammetrics WHERE id=@id",
+                     new { id = id });
+             }
+         }*/
     }
 }

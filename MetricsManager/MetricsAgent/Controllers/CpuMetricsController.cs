@@ -1,5 +1,4 @@
-﻿using Metrics.Services.Repository;
-using MetricsAgent.Services;
+﻿using MetricsAgent.Services;
 using MetricsAgent.DAL.Models;
 using MetricsAgent.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using AutoMapper;
+using MetricsAgent.DAL.Repositories;
 
 namespace MetricsAgent.Controllers
 {

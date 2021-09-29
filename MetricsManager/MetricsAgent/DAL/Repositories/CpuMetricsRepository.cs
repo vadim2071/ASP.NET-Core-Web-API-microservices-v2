@@ -8,14 +8,14 @@ using MetricsAgent.DAL;
 using Dapper;
 using System.Linq;
 
-namespace Metrics.Services.Repository
+namespace MetricsAgent.DAL.Repositories
 {
-    public interface ICpuMetricsRepository : IRepository<CpuMetric>
-    {
-
-    }
-    public class CpuMetricsRepository : ICpuMetricsRepository
-    {
+    //public interface ICpuMetricsRepository : IRepository<CpuMetric>
+    //{
+    //
+    //}
+    public class CpuMetricsRepository : BaseMetricsRepository<CpuMetric>
+    {/*
         //строка подключения
         private const string ConnectionString = "Data Source=metrics.db; Version=3;Pooling=True;Max Pool Size=100;";
         // инжектируем соединение с базой данных в наш репозиторий через конструктор
@@ -90,7 +90,6 @@ namespace Metrics.Services.Repository
                 return connection.QuerySingle<CpuMetric>("SELECT Id, Time, Value FROM cpumetrics WHERE id=@id",
                     new { id = id });
             }
-        }
-
+        }*/
     }
 }

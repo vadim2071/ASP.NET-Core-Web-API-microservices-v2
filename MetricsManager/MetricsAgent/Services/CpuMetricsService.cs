@@ -1,5 +1,4 @@
-﻿using Metrics.Services.Repository;
-using MetricsAgent.DAL.Interfaces;
+﻿using MetricsAgent.DAL.Interfaces;
 using MetricsAgent.DAL.Models;
 using System;
 using System.Collections.Generic;

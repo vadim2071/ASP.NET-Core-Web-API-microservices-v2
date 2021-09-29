@@ -7,14 +7,14 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
 
-namespace Metrics.Services.Repository
+namespace MetricsAgent.DAL.Repositories
 {
-    public interface IHddMetricsRepository : IRepository<HddMetric>
+    /*public interface IHddMetricsRepository : IRepository<HddMetric>
     {
-    }
-    class HddMetricsRepository : IHddMetricsRepository
+    }*/
+    class HddMetricsRepository : BaseMetricsRepository<HddMetric>
     {
-        private const string ConnectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
+       /* private const string ConnectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
         public HddMetricsRepository()
         {
             //SqlMapper.AddTypeHandler(new TimeSpanHandler());
@@ -75,6 +75,6 @@ namespace Metrics.Services.Repository
                 return connection.QuerySingle<HddMetric>("SELECT Id, Time, Value FROM hddmetrics WHERE id=@id",
                     new { id = id });
             }
-        }
+        }*/
     }
 }
